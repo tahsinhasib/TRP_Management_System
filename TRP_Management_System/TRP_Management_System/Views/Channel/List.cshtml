@@ -3,5 +3,29 @@
     ViewBag.Title = "List";
 }
 
-<h2>List</h2>
+<h2>Channels List</h2>
 
+<table class="table table-bordered">
+    <tr>
+        <th>ChannelId</th>
+        <th>ChannelName</th>
+        <th>EstablishedYear</th>
+        <th>Country</th>
+    </tr>
+
+    @foreach (var d in Model)
+            {
+                <tr>
+                    <td>@d.ChannelId</td>
+                    <td>@d.ChannelName</td>
+                    <td>@d.EstablishedYear</td>
+                    <td>@d.Country</td>
+                    <td>
+                        <a href="#" class="btn btn-info">Details</a>
+                        <a href="#" class="btn btn-warning">Edit</a>
+                        <a href="#" class="btn btn-danger">Delete</a>
+                        <a href="#" class="btn btn-success">Add Program </a>
+                    </td>
+                </tr>
+            }
+</table>

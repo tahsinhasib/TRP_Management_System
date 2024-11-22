@@ -12,6 +12,8 @@ namespace TRP_Management_System.Controllers
     public class ChannelController : Controller
     {
         TRP_DBEntities1 db = new TRP_DBEntities1();
+
+        // creating a channel
         [HttpGet]
         public ActionResult Create()
         {
@@ -32,7 +34,7 @@ namespace TRP_Management_System.Controllers
                 };
                 db.Channels.Add(data);
                 db.SaveChanges();
-                //return RedirectToAction("List");
+                return RedirectToAction("List");
             }
             return View(c);
         }
@@ -49,12 +51,44 @@ namespace TRP_Management_System.Controllers
             return View();
         }
 
+
+        // viewing the channel list
+
+        public static Channel Convert(ChannelDTO c)
+        {
+            return new Channel()
+            {
+                ChannelId = c.ChannelId,
+                ChannelName = c.ChannelName,
+                EstablishedYear = c.EstablishedYear,
+                Country = c.Country
+            };
+        }
+
+        public static ChannelDTO Convert(Channel c)
+        {
+            return new ChannelDTO()
+            {
+                ChannelId = c.ChannelId,
+                ChannelName = c.ChannelName,
+                EstablishedYear = c.EstablishedYear,
+                Country = c.Country
+            };
+        }
+
+        public static List<ChannelDTO> Convert(List<Channel> data)
+        {
+            var list = new List<ChannelDTO>();
+            foreach (var d in data)
+            {
+                list.Add(Convert(d));
+            }
+            return list;
+        }
         public ActionResult List()
         {
-            return View();
+            var data = db.Channels.ToList();
+            return View(Convert(data));
         }
-        
-
-
     }
 }

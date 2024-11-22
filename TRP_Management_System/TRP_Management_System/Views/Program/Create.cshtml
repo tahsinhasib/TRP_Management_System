@@ -3,5 +3,19 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
+<h2>Create Program</h2>
 
+
+<form method="post">
+    <input type="text" placeholder="Program Name" name="ProgramName" class="form-control w-100 m-2" />
+    <input type="number" placeholder="TRP Score" name="TRPScore" class="form-control w-100 m-2" />
+    <select name="ChannelId" class="form-control w-100 m-2">
+        <option value="">Select Channel</option>
+        @foreach (var channel in ViewBag.Channels as List<SelectListItem>)
+            {
+                <option value="@channel.Value">@channel.Text</option>
+            }
+    </select>
+    <input type="text" placeholder="Air Time" name="AirTime" class="form-control w-100 m-2" />
+    <input type="submit" value="Create" class="btn btn-success m-2" />
+</form>
