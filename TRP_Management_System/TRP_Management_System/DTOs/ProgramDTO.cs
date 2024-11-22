@@ -20,7 +20,7 @@ namespace TRP_Management_System.DTOs
         public decimal TRPScore { get; set; }
 
         [Required(ErrorMessage = "ChannelId is required.")]
-        [ValidChannelId]
+        //[ValidChannelId]
         public int ChannelId { get; set; }
 
         [Required(ErrorMessage = "Air Time is required.")]
@@ -29,16 +29,16 @@ namespace TRP_Management_System.DTOs
 
 
     // Custom validation attribute for ChannelId
-    public class ValidChannelIdAttribute : ValidationAttribute
-    {
-        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
-        {
-            var dbContext = (TRP_DBEntities1)validationContext.GetService(typeof(TRP_DBEntities1));
-            if (value is int channelId && !dbContext.Channels.Any(c => c.ChannelId == channelId))
-            {
-                return new ValidationResult("The selected Channel ID does not exist.");
-            }
-            return ValidationResult.Success;
-        }
-    }
+    //public class ValidChannelIdAttribute : ValidationAttribute
+    //{
+    //    protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+    //    {
+    //        var dbContext = (TRP_DBEntities1)validationContext.GetService(typeof(TRP_DBEntities1));
+    //        if (value is int channelId && !dbContext.Channels.Any(c => c.ChannelId == channelId))
+    //        {
+    //            return new ValidationResult("The selected Channel ID does not exist.");
+    //        }
+    //        return ValidationResult.Success;
+    //    }
+    //}
 }

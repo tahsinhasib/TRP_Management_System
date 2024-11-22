@@ -24,20 +24,35 @@ namespace TRP_Management_System.Controllers
             return View(new ProgramDTO());
         }
 
+
+
+
         [HttpPost]
         public ActionResult Create(ProgramDTO p)
         {
+            // Re-fetch Channels to ensure the dropdown list is populated
             ViewBag.Channels = db.Channels.Select(c => new SelectListItem
             {
                 Value = c.ChannelId.ToString(),
                 Text = c.ChannelName
             }).ToList();
 
+            // Check if model state is valid
             if (ModelState.IsValid)
             {
                 try
                 {
-                    var data = new Program()
+                    // Check if ProgramName already exists for the selected channel
+                    var existingProgram = db.Programs
+                        .FirstOrDefault(x => x.ProgramName == p.ProgramName && x.ChannelId == p.ChannelId);
+
+                    if (existingProgram != null)
+                    {
+                        ModelState.AddModelError("ProgramName", "Program already exists under this channel.");
+                        return View(p);
+                    }
+
+                    var program = new Program()
                     {
                         ProgramName = p.ProgramName,
                         TRPScore = p.TRPScore,
@@ -45,9 +60,10 @@ namespace TRP_Management_System.Controllers
                         AirTime = p.AirTime
                     };
 
-                    db.Programs.Add(data);
+                    db.Programs.Add(program);
                     db.SaveChanges();
 
+                    TempData["Success"] = "Program added successfully!";
                     return RedirectToAction("List");
                 }
                 catch (Exception ex)
@@ -56,8 +72,12 @@ namespace TRP_Management_System.Controllers
                 }
             }
 
+            // Return view with validation errors
             return View(p);
         }
+
+
+
 
 
 
@@ -72,10 +92,50 @@ namespace TRP_Management_System.Controllers
             return View();
         }
 
-        public ActionResult List()
+
+
+
+        ///////////////////
+        // viewing the channel list
+
+        public static Program Convert(ProgramDTO p)
         {
-            return View();
+            return new Program()
+            {
+                ProgramId = p.ProgramId,
+                ProgramName = p.ProgramName,
+                TRPScore = p.TRPScore,
+                ChannelId = p.ChannelId,
+                AirTime = p.AirTime
+            };
         }
 
+        public static ProgramDTO Convert(Program p)
+        {
+            return new ProgramDTO()
+            {
+                ProgramId = p.ProgramId,
+                ProgramName = p.ProgramName,
+                TRPScore = p.TRPScore,
+                ChannelId = p.ChannelId,
+                AirTime = p.AirTime
+            };
+        }
+
+        public static List<ProgramDTO> Convert(List<Program> data)
+        {
+            var list = new List<ProgramDTO>();
+            foreach (var d in data)
+            {
+                list.Add(Convert(d));
+            }
+            return list;
+        }
+        public ActionResult List()
+        {
+            var data = db.Programs.ToList();
+            return View(Convert(data));
+        }
     }
+
 }

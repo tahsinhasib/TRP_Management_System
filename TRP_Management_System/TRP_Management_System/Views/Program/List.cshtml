@@ -5,3 +5,23 @@
 
 <h2>List</h2>
 
+<table class="table table-bordered">
+    <tr>
+        <th>ProgramId</th>
+        <th>ProgramName</th>
+        <th>TRPScore</th>
+        <th>ChannelId</th>
+        <th>AirTime</th>
+    </tr>
+
+    @foreach (var d in Model)
+    {
+        <tr>
+            <td>@d.ProgramId</td>
+            <td>@d.ProgramName</td>
+            <td>@d.TRPScore</td>
+            <td>@d.ChannelId</td>
+            <td>@d.AirTime</td>
+        </tr>
+    }
+</table>
