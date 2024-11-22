@@ -15,7 +15,6 @@ namespace TRP_Management_System.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            // Populate ViewBag.Channels with sample data or database data
             ViewBag.Channels = db.Channels.Select(c => new SelectListItem
             {
                 Value = c.ChannelId.ToString(),
@@ -28,6 +27,12 @@ namespace TRP_Management_System.Controllers
         [HttpPost]
         public ActionResult Create(ProgramDTO p)
         {
+            ViewBag.Channels = db.Channels.Select(c => new SelectListItem
+            {
+                Value = c.ChannelId.ToString(),
+                Text = c.ChannelName
+            }).ToList();
+
             if (ModelState.IsValid)
             {
                 var data = new Program()
