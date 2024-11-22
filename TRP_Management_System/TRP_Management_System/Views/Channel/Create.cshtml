@@ -7,7 +7,10 @@
 
 <form method="post">
     <input type="text" placeholder="Channel Name" name="ChannelName" class="form-control w-100 m-2" />
+    <p class="text-danger">@Html.ValidationMessage("ChannelName")</p>
     <input type="number" placeholder="Established Year" name="EstablishedYear" class="form-contol m-2" />
+    <p class="text-danger">@Html.ValidationMessage("EstablishedYear")</p>
     <input type="text" placeholder="Country" name="Country" class="form-control w-100 m-2" />
+    <p class="text-danger">@Html.ValidationMessage("Country")</p>
     <input type="submit" value="Create" class="btn btn-success m-2" />
 </form>

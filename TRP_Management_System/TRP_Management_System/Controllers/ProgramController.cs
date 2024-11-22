@@ -35,23 +35,30 @@ namespace TRP_Management_System.Controllers
 
             if (ModelState.IsValid)
             {
-                var data = new Program()
+                try
                 {
-                    ProgramId = p.ProgramId,
-                    ProgramName = p.ProgramName,
-                    TRPScore = p.TRPScore,
-                    ChannelId = p.ChannelId,
-                    AirTime = p.AirTime
-                };
+                    var data = new Program()
+                    {
+                        ProgramName = p.ProgramName,
+                        TRPScore = p.TRPScore,
+                        ChannelId = p.ChannelId,
+                        AirTime = p.AirTime
+                    };
 
-                db.Programs.Add(data);
-                db.SaveChanges();
+                    db.Programs.Add(data);
+                    db.SaveChanges();
 
-                //return RedirectToAction("List");
+                    return RedirectToAction("List");
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", $"An error occurred: {ex.Message}");
+                }
             }
 
             return View(p);
         }
+
 
 
         public ActionResult Delete()
