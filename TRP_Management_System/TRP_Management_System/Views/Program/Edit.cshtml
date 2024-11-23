@@ -5,3 +5,15 @@
 
 <h2>Edit</h2>
 
+
+<form method="post">
+    <input type="hidden" value="@Model.ProgramId" name="ProgramId" />
+    <input type="text" value="@Model.ProgramName" placeholder="Program Name" name="ProgramName" class="form-control w-100 m-2" />
+    <p class="text-danger">@Html.ValidationMessage("ProgramName")</p>
+    <input type="number" value="@Model.TRPScore" placeholder="TRP Score" name="TRPScore" class="form-contol m-2 w-100" />
+    <p class="text-danger">@Html.ValidationMessage("TRPScore")</p>
+    <input type="hidden" value="@Model.ChannelId" name="ChannelId" />
+    <input type="text" value="@Model.AirTime" placeholder="AirTime" name="AirTime" class="form-control w-100 m-2" />
+    <p class="text-danger">@Html.ValidationMessage("AirTime")</p>
+    <input type="submit" value="Update" class="btn btn-success m-2" />
+</form>

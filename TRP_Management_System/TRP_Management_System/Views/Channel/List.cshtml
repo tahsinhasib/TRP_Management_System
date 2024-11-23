@@ -4,7 +4,10 @@
 }
 
 <h2>Channels List</h2>
-
+<div class="d-flex align-items-center justify-content-center">
+    <h2>Create more channels?</h2>
+    <a href="/Channel/Create" class="btn btn-success m-2">Create</a>
+</div>
 <table class="table table-bordered">
     <tr>
         <th>ChannelId</th>
@@ -13,19 +16,23 @@
         <th>Country</th>
     </tr>
 
+    @if (TempData["Success"] != null)
+    {
+        <p class="alert alert-success">@TempData["Success"]</p>
+    }
+
     @foreach (var d in Model)
-            {
-                <tr>
-                    <td>@d.ChannelId</td>
-                    <td>@d.ChannelName</td>
-                    <td>@d.EstablishedYear</td>
-                    <td>@d.Country</td>
-                    <td>
-                        <a href="#" class="btn btn-info">Details</a>
-                        <a href="#" class="btn btn-warning">Edit</a>
-                        <a href="#" class="btn btn-danger">Delete</a>
-                        <a href="#" class="btn btn-success">Add Program </a>
-                    </td>
-                </tr>
-            }
+    {
+        <tr>
+            <td>@d.ChannelId</td>
+            <td>@d.ChannelName</td>
+            <td>@d.EstablishedYear</td>
+            <td>@d.Country</td>
+            <td>
+                <a href="#" class="btn btn-info">Details</a>
+                <a href="@Url.Action("Edit", "Channel", new { ChannelId = d.ChannelId })" class="btn btn-warning">Edit</a>
+                <a href="@Url.Action("Delete", "Channel", new { ChannelId = d.ChannelId })" class="btn btn-danger">Delete</a>
+            </td>
+        </tr>
+    }
 </table>

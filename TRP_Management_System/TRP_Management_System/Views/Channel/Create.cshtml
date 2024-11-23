@@ -3,14 +3,23 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create Channel</h2>
 
-<form method="post">
-    <input type="text" placeholder="Channel Name" name="ChannelName" class="form-control w-100 m-2" />
-    <p class="text-danger">@Html.ValidationMessage("ChannelName")</p>
-    <input type="number" placeholder="Established Year" name="EstablishedYear" class="form-contol m-2" />
-    <p class="text-danger">@Html.ValidationMessage("EstablishedYear")</p>
-    <input type="text" placeholder="Country" name="Country" class="form-control w-100 m-2" />
-    <p class="text-danger">@Html.ValidationMessage("Country")</p>
-    <input type="submit" value="Create" class="btn btn-success m-2" />
-</form>
+
+<div class="d-flex justify-content-center align-items-center flex-column">
+    <div><h2>Create Channel</h2></div>
+    <div class="w-50 rounded-4 border p-5 border-3">
+        <form method="post" class="d-flex flex-column justify-content-center align-items-center">
+            <input type="text" placeholder="Channel Name" name="ChannelName" class="form-control w-100 m-2" />
+            <p class="text-danger">@Html.ValidationMessage("ChannelName")</p>
+            <input type="number" placeholder="Established Year" name="EstablishedYear" class="form-contol m-2 w-100" />
+            <p class="text-danger">@Html.ValidationMessage("EstablishedYear")</p>
+            <input type="text" placeholder="Country" name="Country" class="form-control w-100 m-2" />
+            <p class="text-danger">@Html.ValidationMessage("Country")</p>
+            <input type="submit" value="Create" class="btn btn-success m-2" />
+            @if (TempData["Error"] != null) 
+            {
+                <p class="alert alert-success">@TempData["Success"]</p>
+            }
+        </form>
+    </div>
+</div>

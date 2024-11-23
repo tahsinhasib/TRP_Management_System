@@ -5,3 +5,13 @@
 
 <h2>Edit</h2>
 
+<form method="post">
+    <input type="hidden" value="@Model.ChannelId" name="ChannelId" />
+    <<input type="text" value="@Model.ChannelName" placeholder="Channel Name" name="ChannelName" class="form-control w-100 m-2" />
+    <p class="text-danger">@Html.ValidationMessage("ChannelName")</p>
+    <input type="number" value="@Model.EstablishedYear" placeholder="Established Year" name="EstablishedYear" class="form-contol m-2 w-100" />
+    <p class="text-danger">@Html.ValidationMessage("EstablishedYear")</p>
+    <input type="text" value="@Model.Country" placeholder="Country" name="Country" class="form-control w-100 m-2" />
+    <p class="text-danger">@Html.ValidationMessage("Country")</p>
+    <input type="submit" value="Update" class="btn btn-success m-2" />
+</form>
