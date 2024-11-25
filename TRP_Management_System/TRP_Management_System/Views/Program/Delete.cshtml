@@ -3,5 +3,13 @@
     ViewBag.Title = "Delete";
 }
 
-<h2>Delete</h2>
 
+<h2>Delete Program</h2>
+
+<p>Are you sure you want to delete the program "<strong>@Model.ProgramName</strong>"?</p>
+
+<form method="post" action="@Url.Action("DeleteConfirmed", "Program")">
+    <input type="hidden" name="ProgramId" value="@Model.ProgramId" />
+    <button type="submit" class="btn btn-danger">Delete</button>
+    <a href="@Url.Action("List", "Program")" class="btn btn-secondary">Cancel</a>
+</form>

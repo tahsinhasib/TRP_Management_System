@@ -198,6 +198,52 @@ namespace TRP_Management_System.Controllers
             ViewBag.Channels = new SelectList(db.Channels.ToList(), "ChannelId", "ChannelName", programDto.ChannelId);
             return View(programDto);
         }
+
+
+
+
+        // GET: Delete Program
+        [HttpGet]
+        public ActionResult Delete(int? ProgramId)
+        {
+            if (ProgramId == null)
+            {
+                TempData["Error"] = "ProgramId is missing.";
+                return RedirectToAction("List"); // Redirect to the list of programs
+            }
+
+            var data = db.Programs.Find(ProgramId.Value); // Find the program by ID
+            if (data == null)
+            {
+                TempData["Error"] = "Program not found.";
+                return RedirectToAction("List");
+            }
+
+            return View(data); // Pass the program entity to the view
+        }
+
+        // POST: Delete Program
+        [HttpPost]
+        public ActionResult DeleteConfirmed(int ProgramId)
+        {
+            var data = db.Programs.Find(ProgramId); // Find the program by ID
+            if (data == null)
+            {
+                TempData["Error"] = "Program not found.";
+                return RedirectToAction("List");
+            }
+
+            // Perform the deletion
+            db.Programs.Remove(data);
+            db.SaveChanges();
+
+            TempData["Success"] = "Program deleted successfully!";
+            return RedirectToAction("List");
+        }
+
+
+
+
     }
 
 }

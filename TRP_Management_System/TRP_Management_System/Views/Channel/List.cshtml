@@ -3,12 +3,14 @@
     ViewBag.Title = "List";
 }
 
-<h2>Channels List</h2>
+<h2 class="d-flex justify-content-center align-items-center">Channels List</h2>
 <div class="d-flex align-items-center justify-content-center">
-    <h2>Create more channels?</h2>
-    <a href="/Channel/Create" class="btn btn-success m-2">Create</a>
+    <a href="/Channel/Create" class="btn btn-success m-2">Create Channel</a>
+    <a href="/Program/Create" class="btn btn-info m-2">Create Program</a>
+    <a href="/Program/List" class="btn btn-info m-2">Programs List</a>
 </div>
-<table class="table table-bordered">
+<table class="table table-bordered d-flex align-items-center justify-content-center">
+
     <tr>
         <th>ChannelId</th>
         <th>ChannelName</th>
@@ -17,9 +19,14 @@
     </tr>
 
     @if (TempData["Success"] != null)
-    {
-        <p class="alert alert-success">@TempData["Success"]</p>
-    }
+            {
+                <p class="d-flex align-items-center justify-content-center alert alert-success w-50">@TempData["Success"]</p>
+            }
+
+    @if (TempData["Error"] != null)
+            {
+                <p class="d-flex align-items-center justify-content-center alert alert-danger w-50">@TempData["Error"]</p>
+            }
 
     @foreach (var d in Model)
     {

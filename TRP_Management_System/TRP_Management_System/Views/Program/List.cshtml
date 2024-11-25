@@ -3,9 +3,16 @@
     ViewBag.Title = "List";
 }
 
-<h2>List</h2>
+<h2 class="d-flex justify-content-center align-items-center">List of programs</h2>
 
-<table class="table table-bordered">
+<div class="d-flex align-items-center justify-content-center">
+    <a href="/Channel/Create" class="btn btn-success m-2">Create Channel</a>
+    <a href="/Channel/List" class="btn btn-success m-2">Channel List</a>
+    <a href="/Program/Create" class="btn btn-info m-2">Create Program</a>
+</div>
+
+<table class="d-flex align-items-center justify-content-center table table-bordered">
+
     <tr>
         <th>ProgramId</th>
         <th>ProgramName</th>
@@ -13,6 +20,14 @@
         <th>ChannelId</th>
         <th>AirTime</th>
     </tr>
+
+
+    @if (TempData["Success"] != null)
+            {
+                <p class="alert alert-success w-50">@TempData["Success"]</p>
+            }
+
+
 
     @foreach (var d in Model)
     {
@@ -25,9 +40,9 @@
             <td>
                 <a href="#" class="btn btn-info">Details</a>
                 <a href="@Url.Action("Edit", "Program", new { ProgramId = d.ProgramId })" class="btn btn-warning">Edit</a>
-                <a href="#" class="btn btn-danger">Delete</a>
+                <a href="@Url.Action("Delete", "Program", new { ProgramId = d.ProgramId })" class="btn btn-danger">Delete</a>
             </td>
         </tr>
-        
+
     }
 </table>
