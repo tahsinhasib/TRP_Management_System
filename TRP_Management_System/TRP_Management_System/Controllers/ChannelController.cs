@@ -37,7 +37,7 @@ namespace TRP_Management_System.Controllers
                 db.SaveChanges();
 
                 TempData["Success"] = "Channel created successfully!";
-                //return RedirectToAction("List");
+                return RedirectToAction("List");
             }
             return View(c);
         }
@@ -50,7 +50,7 @@ namespace TRP_Management_System.Controllers
         {
             if (ChannelId == null) // Check if ChannelId is null
             {
-                TempData["Error"] = "ChannelId is missing.";
+                TempData["Error"] = "id not found.";
                 return RedirectToAction("List"); // Redirect to List if no ChannelId is provided
             }
 

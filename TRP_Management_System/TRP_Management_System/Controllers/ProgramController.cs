@@ -64,7 +64,7 @@ namespace TRP_Management_System.Controllers
                     db.SaveChanges();
 
                     TempData["Success"] = "Program added successfully!";
-                    //return RedirectToAction("List");
+                    return RedirectToAction("List");
                 }
                 catch (Exception ex)
                 {
