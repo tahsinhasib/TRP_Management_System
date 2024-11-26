@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Runtime.Remoting.Channels;
 using System.Web;
 using TRP_Management_System.EF;
 
@@ -31,14 +32,22 @@ namespace TRP_Management_System.DTOs
     //Custom validation attribute for ChannelId
     public class ValidChannelIdAttribute : ValidationAttribute
     {
+
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
-            var dbContext = (TRP_DBEntities1)validationContext.GetService(typeof(TRP_DBEntities1));
-            if (value is int channelId && !dbContext.Channels.Any(c => c.ChannelId == channelId))
+            using (var dbContext = new TRP_DBEntities1())
             {
-                return new ValidationResult("The selected Channel ID does not exist.");
+                if (value is int channelId && !dbContext.Channels.Any(c => c.ChannelId == channelId))
+                {
+                    return new ValidationResult("The selected Channel ID does not exist.");
+                }
             }
             return ValidationResult.Success;
         }
+
     }
+
+
+
+
 }
