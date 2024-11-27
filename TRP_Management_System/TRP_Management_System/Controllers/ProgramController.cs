@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TRP_Management_System.Auth;
 using TRP_Management_System.DTOs;
 using TRP_Management_System.EF;
 
@@ -11,6 +12,11 @@ namespace TRP_Management_System.Controllers
     public class ProgramController : Controller
     {
         TRP_DBEntities1 db = new TRP_DBEntities1();
+
+
+
+
+
 
         [HttpGet]
         public ActionResult Create()
@@ -135,7 +141,7 @@ namespace TRP_Management_System.Controllers
         }
 
 
-
+        [AdminAccess]
 
 
         [HttpGet]

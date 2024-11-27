@@ -39,8 +39,16 @@
             <td>@d.AirTime</td>
             <td>
                 <a href="#" class="btn btn-info">Details</a>
-                <a href="@Url.Action("Edit", "Program", new { ProgramId = d.ProgramId })" class="btn btn-warning">Edit</a>
-                <a href="@Url.Action("Delete", "Program", new { ProgramId = d.ProgramId })" class="btn btn-danger">Delete</a>
+                @{
+
+                    var user = (TRP_Management_System.EF.User)Session["user"];
+                }
+                @if (user != null && user.Role == 1)
+                    {
+                        <a href="@Url.Action("Edit", "Program", new { ProgramId = d.ProgramId })" class="btn btn-warning">Edit</a>
+                        <a href="@Url.Action("Delete", "Program", new { ProgramId = d.ProgramId })" class="btn btn-danger">Delete</a>
+                    }
+
             </td>
         </tr>
 

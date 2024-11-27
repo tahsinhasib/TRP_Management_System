@@ -27,5 +27,6 @@ namespace TRP_Management_System.EF
     
         public virtual DbSet<Channel> Channels { get; set; }
         public virtual DbSet<Program> Programs { get; set; }
+        public virtual DbSet<User> Users { get; set; }
     }
 }

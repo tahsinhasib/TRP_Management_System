@@ -8,6 +8,7 @@
         <EntityTypeShape EntityType="TRP_DBModel.Channel" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="TRP_DBModel.Program" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
         <AssociationConnector Association="TRP_DBModel.FK_Programs_Channels" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="TRP_DBModel.User" Width="1.5" PointX="0.75" PointY="4.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

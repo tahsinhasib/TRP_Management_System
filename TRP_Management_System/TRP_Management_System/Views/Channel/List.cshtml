@@ -37,8 +37,15 @@
             <td>@d.Country</td>
             <td>
                 <a href="#" class="btn btn-info">Details</a>
-                <a href="@Url.Action("Edit", "Channel", new { ChannelId = d.ChannelId })" class="btn btn-warning">Edit</a>
-                <a href="@Url.Action("Delete", "Channel", new { ChannelId = d.ChannelId })" class="btn btn-danger">Delete</a>
+                @{
+
+                    var user = (TRP_Management_System.EF.User)Session["user"];
+                }
+                @if (user != null && user.Role == 1)
+                {
+                    <a href="@Url.Action("Edit", "Channel", new { ChannelId = d.ChannelId })" class="btn btn-warning">Edit</a>
+                    <a href="@Url.Action("Delete", "Channel", new { ChannelId = d.ChannelId })" class="btn btn-danger">Delete</a>
+                }
             </td>
         </tr>
     }
